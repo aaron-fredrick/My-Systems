@@ -67,7 +67,8 @@ The site should feel like a system responding to an operator.
 - [x] Drag momentum and release settling.
 - [x] Network signal particles.
 - [x] Node hover response.
-- [ ] Add controlled pointer-proximity influence without making the globe chase the cursor.
+- [x] Controlled pointer-position tracking captured for interaction choreography.
+- [ ] Apply pointer proximity influence to globe rotation without making it chase the cursor.
 - [ ] Add intentional idle network activity with sparse, non-random-feeling events.
 - [ ] Improve the idle -> interaction -> release state machine so transitions are perceptibly intentional.
 - [x] Tune globe scale/position through the architecture scroll sequence.
@@ -126,32 +127,29 @@ Primary motion files:
 
 When adding motion, prefer CSS transforms and requestAnimationFrame/GSAP ScrollTrigger where already available. Avoid unnecessary DOM effects, expensive filters, or continuous animation of large numbers of elements.
 
-## Recent implementation pass
+## Latest implementation pass
 
-The latest pass strengthens the page without changing its content or visual identity:
+The globe/architecture pass has now been implemented:
 
-- Hero now has stronger layered pointer depth with restrained perspective rotation.
-- Hero exit uses coordinated scroll progress so copy, orbital visual, and grid separate at different depths.
-- Architecture and globe receive a more deliberate scroll entrance and focus transition.
-- System rows now behave as separate interface layers: number, name, description and status move differently in response to the pointer.
-- The active system signal originates from the pointer position rather than being purely decorative.
-- Neighbouring system rows recede when one system is addressed.
-- Scroll velocity is treated as a transient input and decays naturally rather than leaving elements displaced.
-- Cursor states communicate `VIEW`, `OPEN`, and `DRAG` instead of only expanding generically.
-- Principles and CTA now participate in the motion hierarchy rather than relying only on entrance animation.
-- Brand colors remain explicitly protected through the dedicated brand-lock layer.
-- Architecture copy now has explicit stacking/isolation rules so the `04 / DESIGNED TO CONNECT` label and `Independent by default. Connected when you want.` heading cannot visually overlap the globe layer.
-- System signal pseudo-elements are explicitly non-interactive and reset when the row is no longer active, preventing the blue top/bottom effects from remaining stuck after pointer transitions.
+- Globe remains autonomously rotating when idle.
+- Pointer position is tracked continuously for the globe interaction layer.
+- Drag input continues to provide direct rotation and release momentum.
+- Node proximity/hover remains available as the globe's active visual response.
+- Architecture copy movement was softened and its scroll trigger starts later so the heading has clear separation from the globe entrance.
+- Globe entrance now has a larger, slower depth transition to make the architecture section feel like a deliberate hand-off from the preceding content.
+- System row pointer variables now include horizontal and vertical response, giving the four row information layers distinct movement.
+- Active system signal origin is reset on pointer exit.
+- Brand palette remains unchanged and locked.
 
 ## Next implementation pass
 
-The next pass should focus on **globe interaction fidelity and final choreography**, not adding more decorative effects:
+The next pass should focus on **true globe proximity/state behaviour and full-page choreography**, not decorative effects:
 
-1. Add restrained pointer-proximity influence to the globe.
-2. Refine globe idle/interaction/release states.
-3. Make network activity sparse and intentional.
-4. Replace the remaining generic system signal loop with interaction-driven signalling.
-5. Perform a full-page motion timing pass and remove any competing movements.
+1. Use the tracked pointer position to influence globe rotation subtly based on proximity.
+2. Introduce explicit idle -> aware -> active -> settling globe states.
+3. Make network activity sparse and event-like rather than continuously uniform.
+4. Replace the remaining generic system signal loop with interaction/scroll-driven signalling.
+5. Perform a full-page timing pass and remove competing motion.
 6. Test performance, touch, keyboard and reduced-motion behaviour.
 
 ## Definition of done
