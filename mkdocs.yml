@@ -1,0 +1,58 @@
+site_name: My Systems
+site_description: Self-hosted, configurable systems for owning more of your infrastructure.
+site_url: https://aaron-fredrick.github.io/My-Systems/
+repo_url: https://github.com/aaron-fredrick/My-Systems
+repo_name: aaron-fredrick/My-Systems
+edit_uri: edit/main/docs/
+
+nav:
+  - Home: index.md
+  - Systems:
+      - MyDNS: systems/mydns.md
+      - MyDrive: systems/mydrive.md
+      - MyBackup: systems/mybackup.md
+      - MyVault: systems/myvault.md
+      - MyAuth: systems/myauth.md
+      - MyProxy: systems/myproxy.md
+      - MyMonitor: systems/mymonitor.md
+  - Architecture:
+      - Ecosystem: architecture/ecosystem.md
+  - Brand:
+      - Brand Profile: brand/brand-profile.md
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+  font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - tables
+
+extra_css:
+  - stylesheets/extra.css
