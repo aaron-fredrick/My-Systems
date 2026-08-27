@@ -1,0 +1,50 @@
+:root {
+  --md-primary-fg-color: #1769C2;
+  --md-primary-fg-color--light: #5BA7FF;
+  --md-primary-fg-color--dark: #0F57A4;
+  --md-accent-fg-color: #1769C2;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0B0F14;
+  --md-default-bg-color--light: #111821;
+  --md-default-fg-color: #F3F6F8;
+  --md-default-fg-color--light: #AEB9C4;
+  --md-default-fg-color--lighter: #71808E;
+  --md-code-bg-color: #111821;
+  --md-code-fg-color: #F3F6F8;
+  --md-typeset-a-color: #5BA7FF;
+  --md-primary-fg-color: #5BA7FF;
+  --md-primary-fg-color--light: #79B8FF;
+  --md-primary-fg-color--dark: #1769C2;
+  --md-accent-fg-color: #79B8FF;
+}
+
+.md-header {
+  box-shadow: none;
+}
+
+.md-main__inner {
+  max-width: 1200px;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  letter-spacing: -0.015em;
+}
+
+.md-typeset table:not([class]) {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.md-typeset code,
+.md-typeset pre {
+  border-radius: 6px;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 8px;
+}
