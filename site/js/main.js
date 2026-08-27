@@ -2,16 +2,24 @@
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if(window.gsap){
-    gsap.registerPlugin(ScrollTrigger);
-    if(!reduce){
+    if(window.ScrollTrigger){
+      gsap.registerPlugin(ScrollTrigger);
+      if(!reduce){
+        gsap.from('.hero-line',{yPercent:115,duration:1.2,stagger:.12,ease:'power4.out',delay:.15});
+        gsap.from('.hero .reveal',{opacity:0,y:24,duration:.8,delay:.55,ease:'power3.out'});
+        gsap.utils.toArray('.reveal').forEach(el=>{if(el.closest('.hero'))return;gsap.to(el,{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}})});
+        gsap.to('.orb',{y:-100,scale:1.06,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+        gsap.to('.hero-grid',{y:80,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+      }
+    } else if(!reduce){
       gsap.from('.hero-line',{yPercent:115,duration:1.2,stagger:.12,ease:'power4.out',delay:.15});
       gsap.from('.hero .reveal',{opacity:0,y:24,duration:.8,delay:.55,ease:'power3.out'});
-      gsap.utils.toArray('.reveal').forEach(el=>{if(el.closest('.hero'))return;gsap.to(el,{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',once:true}})});
-      gsap.to('.orb',{y:-100,scale:1.06,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
-      gsap.to('.hero-grid',{y:80,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
-    }else{
+      gsap.utils.toArray('.reveal').forEach(el=>{if(el.closest('.hero'))return;gsap.to(el,{opacity:1,y:0,duration:.85,ease:'power3.out'});});
+    } else {
       document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity='1';el.style.transform='none'});
     }
+  } else {
+    document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity='1';el.style.transform='none'});
   }
 
   const cursor=document.querySelector('.cursor');
@@ -58,8 +66,8 @@
     const la=lat*Math.PI/180,lo=lon*Math.PI/180+rotY;
     const x=Math.cos(la)*Math.sin(lo), y=Math.sin(la), z=Math.cos(la)*Math.cos(lo);
     const cy=Math.cos(rotX),sy=Math.sin(rotX);
-    const yy=y*cy-z*sy,zz=y*sy+z*cy;
-    return {x:x,y:yy,z:zz};
+    const yy=y*cy-z*sy;
+    return {x:x,y:yy,z:y*sy+z*cy};
   }
   function point(p,cx,cy,r){return{x:cx+p.x*r,y:cy-p.y*r,z:p.z}}
 
@@ -70,7 +78,6 @@
     grd.addColorStop(0,'rgba(91,167,255,.045)');grd.addColorStop(.72,'rgba(91,167,255,.012)');grd.addColorStop(1,'rgba(91,167,255,0)');
     ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,r*1.04,0,Math.PI*2);ctx.fill();
 
-    const pts=[];
     for(let lat=-90;lat<=90;lat+=dotStep){
       for(let lon=-180;lon<180;lon+=dotStep){
         const p=project(lat,lon);if(p.z<-.04)continue;
@@ -109,10 +116,7 @@
   }
 
   function tick(){
-    if(!drag){
-      const idle=performance.now()-lastInteraction>900;
-      if(idle){targetY+=.0009;targetX*=.985}
-    }
+    if(!drag&&performance.now()-lastInteraction>900)targetY+=.0009;
     rotY+=(targetY-rotY)*.08;rotX+=(targetX-rotX)*.08;
     if(reduce){draw();return}
     requestAnimationFrame(tick);
@@ -129,7 +133,7 @@
   canvas.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;lastY=e.clientY;lastInteraction=performance.now();canvas.setPointerCapture(e.pointerId);globe.classList.add('interacted')});
   canvas.addEventListener('pointermove',e=>{
     if(drag){const dx=e.clientX-lastX,dy=e.clientY-lastY;targetY+=dx*.008;targetX=Math.max(-1.15,Math.min(1.15,targetX+dy*.008));lastX=e.clientX;lastY=e.clientY;lastInteraction=performance.now()}
-    hoverNode=findNode(...Object.values(pointerPos(e)));
+    const p=pointerPos(e);hoverNode=findNode(p.x,p.y);
   });
   canvas.addEventListener('pointerup',e=>{drag=false;lastInteraction=performance.now();try{canvas.releasePointerCapture(e.pointerId)}catch(_){} });
   canvas.addEventListener('pointercancel',()=>{drag=false});
