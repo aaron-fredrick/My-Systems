@@ -1,4 +1,4 @@
-name: Deploy documentation
+name: Deploy My Systems site
 
 on:
   push:
@@ -21,21 +21,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
+      - name: Assemble static site
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          cp -R site/. _site/
+          cp -R docs _site/docs
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Build site
-        run: mkdocs build --strict
-
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: _site
 
   deploy:
     environment:
