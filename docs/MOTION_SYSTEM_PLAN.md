@@ -57,6 +57,7 @@ The site should feel like a system responding to an operator.
 - [x] Signal origin follows the operator's pointer position.
 - [x] Neighbouring rows recede while one row is addressed.
 - [x] Keyboard focus receives the same active-row language.
+- [x] Reset signal transforms when the row loses hover/focus/active state to prevent stuck borders.
 - [ ] Replace the remaining generic looping signal behaviour with a fully pointer/scroll-progress-driven travelling signal.
 
 ### Phase 4 - Globe interaction
@@ -97,6 +98,7 @@ The site should feel like a system responding to an operator.
 - [ ] Verify keyboard navigation and focus states.
 - [ ] Verify reduced-motion mode removes non-essential movement while retaining usability.
 - [ ] Verify touch interactions do not conflict with native scrolling.
+- [x] Prevent architecture label/heading layering conflicts by explicitly separating text and globe stacking contexts.
 
 ## Target choreography
 
@@ -138,6 +140,8 @@ The latest pass strengthens the page without changing its content or visual iden
 - Cursor states communicate `VIEW`, `OPEN`, and `DRAG` instead of only expanding generically.
 - Principles and CTA now participate in the motion hierarchy rather than relying only on entrance animation.
 - Brand colors remain explicitly protected through the dedicated brand-lock layer.
+- Architecture copy now has explicit stacking/isolation rules so the `04 / DESIGNED TO CONNECT` label and `Independent by default. Connected when you want.` heading cannot visually overlap the globe layer.
+- System signal pseudo-elements are explicitly non-interactive and reset when the row is no longer active, preventing the blue top/bottom effects from remaining stuck after pointer transitions.
 
 ## Next implementation pass
 
