@@ -1,10 +1,12 @@
 # My Systems
 
-> A collection of self-hosted, configurable systems for owning more of your infrastructure.
+> Open-source systems for self-hosting, self-management, privacy and ownership.
 
-**My Systems** is a family of practical software and infrastructure projects designed to let individuals build, operate and integrate their own services - from a repurposed laptop or desktop to a dedicated home server.
+**My Systems** is a family of open-source, self-hosted and self-managed software and infrastructure systems for people who want greater control over their services, infrastructure and data.
 
-The goal is not to eliminate cloud services. It is to build useful, configurable alternatives where ownership, control, privacy, learning or resilience provide a meaningful advantage.
+The systems are designed to provide practical alternatives to relying entirely on third-party hosted services. They can run on infrastructure you control - from a repurposed laptop or desktop to a dedicated home server.
+
+The goal is not to eliminate cloud services. It is to give people the option to own and operate the systems that matter to them, particularly where privacy, control, independence or resilience provide meaningful value.
 
 ## Systems
 
@@ -33,13 +35,13 @@ The documentation site contains the ecosystem overview, individual system docume
 
 ## Principles
 
-- **Own what matters** - self-host where control provides real value.
-- **Open and portable** - prefer open standards and interoperable interfaces.
-- **Independent systems** - every My System should remain useful on its own.
-- **Composable infrastructure** - systems should integrate cleanly without becoming tightly coupled.
-- **Security by design** - identity, secrets, recovery and operational security are first-class concerns.
-- **Practical over ideological** - use hosted services when they are genuinely better.
-- **Document everything needed to operate it** - reproducibility matters as much as implementation.
+- **Ownership** - keep infrastructure understandable and controllable.
+- **Privacy** - keep sensitive data and services under your control where it matters.
+- **Open source** - build systems that are inspectable, modifiable and transparent.
+- **Independence** - each system should remain useful on its own.
+- **Composability** - systems should integrate through clear interfaces and established standards.
+- **Practicality** - self-hosting is an option, not an ideology.
+- **Operability** - documentation, recovery and maintenance are part of the system.
 
 ## Project Structure
 
@@ -56,7 +58,7 @@ My-Systems/
 
 ## Status
 
-My Systems is an evolving project family. **MyDNS** is currently the first active implementation.
+My Systems is an evolving open-source project family. **MyDNS** is currently the first active implementation.
 
 ## License
 
