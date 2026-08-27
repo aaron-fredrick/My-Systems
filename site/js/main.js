@@ -27,8 +27,8 @@
         document.querySelectorAll('.section-label').forEach(label=>{if(label.closest('.hero'))return;gsap.fromTo(label,{x:-12,opacity:.25},{x:0,opacity:1,duration:.7,ease:'power3.out',scrollTrigger:{trigger:label,start:'top 90%',once:true}})});
         const architecture=document.querySelector('.architecture');
         if(architecture){
-          gsap.to('.architecture-copy',{y:-45,scrollTrigger:{trigger:architecture,start:'top bottom',end:'center center',scrub:1.1}});
-          gsap.fromTo('.network',{y:120,scale:.84,opacity:.35},{y:-20,scale:1,opacity:1,ease:'none',scrollTrigger:{trigger:architecture,start:'top bottom',end:'75% top',scrub:1.1}});
+          gsap.to('.architecture-copy',{y:-35,scrollTrigger:{trigger:architecture,start:'top 85%',end:'center center',scrub:1.1}});
+          gsap.fromTo('.network',{y:150,scale:.78,opacity:.25},{y:-10,scale:1,opacity:1,ease:'none',scrollTrigger:{trigger:architecture,start:'top 95%',end:'70% top',scrub:1.15}});
         }
         const cta=document.querySelector('.cta');
         if(cta){gsap.fromTo('.cta-content',{y:70,opacity:.65},{y:0,opacity:1,ease:'none',scrollTrigger:{trigger:cta,start:'top 90%',end:'center center',scrub:.9}});gsap.to('.cta .ring',{rotation:180,scale:1.08,scrollTrigger:{trigger:cta,start:'top bottom',end:'bottom top',scrub:1.5}})}
@@ -53,7 +53,7 @@
     let px=0,py=0,targetX=0,targetY=0;
     hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();targetX=(e.clientX-r.left)/r.width-.5;targetY=(e.clientY-r.top)/r.height-.5},{passive:true});
     hero.addEventListener('pointerleave',()=>{targetX=0;targetY=0},{passive:true});
-    (function heroMotion(){px+=(targetX-px)*.075;py+=(targetY-py)*.075;root.style.setProperty('--mx',px.toFixed(3));root.style.setProperty('--my',py.toFixed(3));requestAnimationFrame(heroMotion)})();
+    (function heroMotion(){px+=(targetX-px)*.075;py+=(targetY-py)*.075;root.style.setProperty('--mx',px.toFixed(3));root.style.setProperty('--my',py.toFixed(3));root.style.setProperty('--hero-rx',(py*-2.2).toFixed(2)+'deg');root.style.setProperty('--hero-ry',(px*3.2).toFixed(2)+'deg');requestAnimationFrame(heroMotion)})();
   }
   if(!reduce){
     document.querySelectorAll('.magnetic').forEach(el=>{
@@ -64,7 +64,7 @@
   }
   const systems=Array.from(document.querySelectorAll('.system'));
   systems.forEach(row=>{
-    row.addEventListener('pointermove',e=>{if(!fine||reduce)return;const r=row.getBoundingClientRect(),x=clamp((e.clientX-r.left)/r.width,0,1),y=(e.clientY-r.top)/r.height-.5;row.style.setProperty('--row-y',(y*6).toFixed(2)+'px');row.style.setProperty('--signal-origin',(x*100).toFixed(1)+'%')},{passive:true});
+    row.addEventListener('pointermove',e=>{if(!fine||reduce)return;const r=row.getBoundingClientRect(),x=clamp((e.clientX-r.left)/r.width,0,1),y=(e.clientY-r.top)/r.height-.5;row.style.setProperty('--row-y',(y*6).toFixed(2)+'px');row.style.setProperty('--pointer-x',((x-.5)*20).toFixed(2)+'px');row.style.setProperty('--pointer-y',(y*2).toFixed(2)+'px');row.style.setProperty('--signal-origin',(x*100).toFixed(1)+'%')},{passive:true});
     row.addEventListener('pointerenter',()=>row.classList.add('is-active'),{passive:true});
     row.addEventListener('pointerleave',()=>{row.style.setProperty('--row-y','0px');row.style.setProperty('--pointer-x','0px');row.style.setProperty('--pointer-y','0px');row.style.setProperty('--signal-origin','0%');row.classList.remove('is-active')},{passive:true});
     row.addEventListener('focus',()=>row.classList.add('is-active'));
@@ -76,10 +76,8 @@
   if('IntersectionObserver' in window&&!reduce){
     const rowObserver=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
-        if(entry.isIntersecting&&entry.intersectionRatio>.62){
-          systems.forEach(r=>{if(r!==entry.target)r.classList.remove('scroll-active')});
-          entry.target.classList.add('scroll-active');
-        }else if(!entry.isIntersecting){entry.target.classList.remove('scroll-active')}
+        if(entry.isIntersecting&&entry.intersectionRatio>.62){systems.forEach(r=>r.classList.remove('scroll-active'));entry.target.classList.add('scroll-active');}
+        else if(!entry.isIntersecting)entry.target.classList.remove('scroll-active');
       });
     },{threshold:[.62,.8]});
     systems.forEach(row=>rowObserver.observe(row));
@@ -88,7 +86,7 @@
   if(!canvas||!globe)return;
   const ctx=canvas.getContext('2d');if(!ctx)return;
   const nodes=[{name:'MyDNS',lat:25,lon:-28,known:true},{name:'MyDrive',lat:-15,lon:52,known:true},{name:'MyVault',lat:32,lon:82,known:true},{name:'',lat:58,lon:-92},{name:'',lat:8,lon:-118},{name:'',lat:-42,lon:-55},{name:'',lat:-28,lon:2},{name:'',lat:48,lon:30}];
-  let w=0,h=0,dpr=1,rotX=-.08,rotY=-.18,targetX=rotX,targetY=rotY,drag=false,lastX=0,lastY=0,hoverNode=-1,velocityX=0,velocityY=0,lastInteraction=0;
+  let w=0,h=0,dpr=1,rotX=-.08,rotY=-.18,targetX=rotX,targetY=rotY,drag=false,lastX=0,lastY=0,hoverNode=-1,velocityX=0,velocityY=0,lastInteraction=0,pointerX=0,pointerY=0;
   const R=.37,dotStep=9;
   const connections=[[0,1],[1,2],[0,2],[1,4],[2,7],[0,3],[3,4],[4,5],[5,6],[6,1],[7,2]];
   function resize(){const rect=globe.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,2);w=Math.max(1,rect.width);h=Math.max(1,rect.height);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0)}
@@ -100,9 +98,9 @@
   function pointerPos(e){const rect=canvas.getBoundingClientRect();return{x:e.clientX-rect.left,y:e.clientY-rect.top}}
   function findNode(x,y){const cx=w/2,cy=h/2+8,r=Math.min(w,h)*R;let best=-1,dist=22;nodes.forEach((n,i)=>{const p=project(n.lat,n.lon);if(p.z<.03)return;const q=point(p,cx,cy,r),d=Math.hypot(q.x-x,q.y-y);if(d<dist){dist=d;best=i}});return best}
   canvas.addEventListener('pointerdown',e=>{drag=true;lastInteraction=performance.now();lastX=e.clientX;lastY=e.clientY;velocityX=0;velocityY=0;canvas.setPointerCapture(e.pointerId);globe.classList.add('interacted')});
-  canvas.addEventListener('pointermove',e=>{lastInteraction=performance.now();if(drag){const dx=e.clientX-lastX,dy=e.clientY-lastY;velocityX=dx*.0007;velocityY=dy*.0007;targetY+=dx*.008;targetX=clamp(targetX+dy*.008,-1.15,1.15);lastX=e.clientX;lastY=e.clientY}const p=pointerPos(e);hoverNode=findNode(p.x,p.y)},{passive:true});
+  canvas.addEventListener('pointermove',e=>{lastInteraction=performance.now();const p=pointerPos(e);pointerX=(p.x/w-.5);pointerY=(p.y/h-.5);if(drag){const dx=e.clientX-lastX,dy=e.clientY-lastY;velocityX=dx*.0007;velocityY=dy*.0007;targetY+=dx*.008;targetX=clamp(targetX+dy*.008,-1.15,1.15);lastX=e.clientX;lastY=e.clientY}hoverNode=findNode(p.x,p.y)},{passive:true});
   canvas.addEventListener('pointerup',e=>{drag=false;lastInteraction=performance.now();try{canvas.releasePointerCapture(e.pointerId)}catch(_){}},{passive:true});
   canvas.addEventListener('pointercancel',()=>{drag=false},{passive:true});
-  canvas.addEventListener('pointerleave',()=>{if(!drag)hoverNode=-1},{passive:true});
+  canvas.addEventListener('pointerleave',()=>{if(!drag)hoverNode=-1;pointerX=0;pointerY=0},{passive:true});
   draw();tick();
 })();
