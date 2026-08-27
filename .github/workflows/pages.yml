@@ -21,6 +21,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Apply landing page copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("site/index.html")
+          s = p.read_text()
+          replacements = {
+              "My Systems - self-hosted, configurable systems for owning more of your infrastructure.": "My Systems - open-source, self-hosted and self-managed systems for privacy, control and ownership.",
+              "01 / OWN YOUR INFRASTRUCTURE": "01 / MY SYSTEMS",
+              "<span class=\"hero-line\">Build what</span>": "<span class=\"hero-line\">Your systems.</span>",
+              "<span class=\"hero-line\"><em>you</em> need.</span>": "<span class=\"hero-line\"><em>Your</em> infrastructure.</span>",
+              "A family of self-hosted, configurable systems for people who want to own more of the infrastructure behind their digital lives.": "A family of open-source, self-hosted and self-managed systems for people who want privacy, control and ownership over the infrastructure behind their digital lives.",
+              "My Systems is about <strong>practical ownership</strong>. DNS, storage, identity, secrets, monitoring — build the pieces you actually need, run them on hardware you control, and connect them on your terms.": "My Systems is a <strong>family of open-source systems</strong> for practical self-hosting. DNS, storage, identity, secrets, monitoring — run the systems you need on infrastructure you control, configure them to suit you, and connect them on your terms.",
+              "MY SYSTEMS<small>COMPOSABLE INFRASTRUCTURE</small>": "MY SYSTEMS<small>OPEN • COMPOSABLE • SELF-HOSTED</small>",
+              "06 / START HERE": "06 / EXPLORE THE SYSTEMS",
+              "Make it<br><span>yours.</span>": "Run it<br><span>your way.</span>",
+          }
+          for old, new in replacements.items():
+              if old not in s:
+                  raise SystemExit(f"Expected copy not found: {old}")
+              s = s.replace(old, new)
+          p.write_text(s)
+          PY
+
       - name: Assemble static site
         run: |
           rm -rf _site
