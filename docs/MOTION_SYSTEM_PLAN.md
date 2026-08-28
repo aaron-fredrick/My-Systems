@@ -17,7 +17,7 @@ The motion keeps the viewer engaged through responsiveness, scroll choreography,
 - Preserve `prefers-reduced-motion` and provide touch equivalents where interaction exists.
 
 ## Research-derived benchmark
-Awwwards' current inspiration taxonomy repeatedly treats scrolling, interaction design, microinteractions, parallax, responsive behaviour, storytelling, transitions, gestures, and 3D/WebGL as separate quality dimensions. The benchmark for My Systems is interaction quality and choreography, while the visual language remains technical and infrastructure-oriented.
+Awwwards' inspiration categories treat scrolling, interaction design, microinteractions, parallax, responsive behaviour, storytelling, transitions, gestures, and 3D/WebGL as distinct quality dimensions. My Systems uses these as a quality benchmark while deliberately retaining its own technical/infrastructure visual language.
 
 ## Motion language
 `proximity -> response -> momentum -> alignment -> signal -> transition`
@@ -52,12 +52,13 @@ CSS remains layered as:
 4. `brand-lock.css` - final brand-authoritative overrides
 
 ## Implementation status
-### Implemented interaction pass
+### Final interaction pass implemented
 - Multi-layer hero pointer depth and perspective response.
 - Hero scroll separation and exit choreography.
-- Magnetic controls with explicit pointer-exit reset.
-- System rows respond through movement, alignment and signal-line behaviour.
-- Scroll-addressed system row state.
+- Stronger magnetic controls with explicit pointer-exit reset.
+- Cursor states for links, actions, system viewing and globe manipulation.
+- System rows respond through independent movement, alignment and signal behaviour.
+- Scroll-addressed system row state with neighbouring-row recession.
 - Explicit system hover/focus reset to prevent stuck interaction borders.
 - Autonomous globe rotation while idle.
 - Direct globe drag with inertia and release settling.
@@ -68,8 +69,9 @@ CSS remains layered as:
 - Pointer/touch-compatible globe manipulation.
 - Reduced-motion handling across the modular runtime.
 - No grain/noise/decorative blob layer.
+- Brand colour authority retained in the final CSS layer.
 
-### QA / refinement sequence
+## Final QA sequence
 1. Validate desktop, tablet and mobile rendering.
 2. Tune motion amplitude from rendered behaviour rather than adding effects blindly.
 3. Verify hero and architecture text never overlap during scroll.
@@ -78,4 +80,4 @@ CSS remains layered as:
 6. Profile canvas rendering on lower-power hardware.
 7. Verify `brand-lock.css` remains the final authoritative colour layer.
 8. Perform a final choreography pass so the page reads as one continuous narrative: hero -> systems -> architecture/globe -> principles -> CTA.
-9. Only then consider additional motion; no effects should be added unless they improve comprehension, responsiveness or storytelling.
+9. Do not add further effects unless they improve comprehension, responsiveness or storytelling.
