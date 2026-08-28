@@ -37,8 +37,7 @@ Recurring interaction language:
 - Scroll = progression through the system.
 
 ## Runtime architecture
-The interaction code is now intentionally split by responsibility:
-
+The interaction code is intentionally split by responsibility:
 - `site/js/main.js` - orchestration only
 - `site/js/config.js` - shared capability and accessibility flags
 - `site/js/scroll.js` - GSAP/ScrollTrigger choreography and scroll velocity
@@ -47,37 +46,36 @@ The interaction code is now intentionally split by responsibility:
 - `site/js/globe.js` - autonomous globe, node response, drag and inertia
 
 CSS remains layered as:
-
 1. `base.css` - reset/tokens
 2. `style.css` - visual/layout system
 3. `motion-system.css` - motion rules
 4. `brand-lock.css` - final brand-authoritative overrides
 
 ## Implementation status
-
-### Completed
-- Multi-layer hero pointer depth and subtle perspective response.
+### Implemented interaction pass
+- Multi-layer hero pointer depth and perspective response.
 - Hero scroll separation and exit choreography.
 - Magnetic controls with explicit pointer-exit reset.
 - System rows respond through movement, alignment and signal-line behaviour.
 - Scroll-addressed system row state.
-- Explicit system hover/focus reset to prevent the previous stuck-border behaviour.
+- Explicit system hover/focus reset to prevent stuck interaction borders.
 - Autonomous globe rotation while idle.
-- Direct globe drag with inertia.
-- Globe node/connection proximity response.
+- Direct globe drag with inertia and release settling.
+- Globe node/connection proximity response and travelling network signals.
 - Differentiated section reveal timing.
 - Architecture/globe transition choreography.
 - Scroll velocity as a transient input that settles back to zero.
-- Touch-compatible pointer events for globe manipulation.
+- Pointer/touch-compatible globe manipulation.
 - Reduced-motion handling across the modular runtime.
 - No grain/noise/decorative blob layer.
 
-### Next QA pass
-- Test the live page at desktop, tablet and mobile widths.
-- Tune motion amplitude from real rendered behaviour rather than increasing effects blindly.
-- Check all hero and architecture text for overlap during scroll.
-- Verify system borders and active classes always clear after pointer/focus transitions.
-- Tune globe drag inertia, hover hit areas and mobile gesture feel.
-- Profile canvas rendering on lower-power hardware.
-- Verify brand-lock colours remain authoritative after all CSS refactoring.
-- Only after QA, consider additional scroll-linked transitions.
+### QA / refinement sequence
+1. Validate desktop, tablet and mobile rendering.
+2. Tune motion amplitude from rendered behaviour rather than adding effects blindly.
+3. Verify hero and architecture text never overlap during scroll.
+4. Verify system borders/classes clear after pointer, focus and scroll transitions.
+5. Tune globe hit areas, drag inertia and touch gesture feel.
+6. Profile canvas rendering on lower-power hardware.
+7. Verify `brand-lock.css` remains the final authoritative colour layer.
+8. Perform a final choreography pass so the page reads as one continuous narrative: hero -> systems -> architecture/globe -> principles -> CTA.
+9. Only then consider additional motion; no effects should be added unless they improve comprehension, responsiveness or storytelling.
