@@ -16,15 +16,23 @@ The motion keeps the viewer engaged through responsiveness, scroll choreography,
 - Brand-sensitive colors remain protected by `site/css/brand-lock.css`; use `!important` where required to prevent browser/theme overrides.
 - Preserve `prefers-reduced-motion` and provide touch equivalents where interaction exists.
 
+## Research-derived benchmark
+Awwwards' current inspiration taxonomy repeatedly treats **scrolling, interaction design, microinteractions, parallax, responsive behaviour, storytelling, transitions, gestures, and 3D/WebGL** as separate quality dimensions. Recent examples also explicitly combine scroll + interaction + animation, mobile interaction + 3D, reactive cursors, and parallax rather than relying on static hover decoration.
+
+The important lesson is not to copy the visual style of award-winning creative sites. Awwwards itself has highlighted the risk of copying fashionable layouts/effects without a clear brand concept. For My Systems, the benchmark is therefore **interaction quality and choreography**, while the visual language remains technical and infrastructure-oriented.
+
+Research references:
+- Awwwards single-page directory / interaction taxonomy: https://www.awwwards.com/websites/single-page-1/
+- Awwwards scroll + animation + microinteraction example: https://www.awwwards.com/inspiration/scrolling-stats-tear-the-paper-ceiling
+- Awwwards mobile scroll / responsive / 3D example: https://www.awwwards.com/inspiration/mobile-scroll-and-interactions-noomo-labs
+- Awwwards cursor-led minimal interaction example: https://www.awwwards.com/inspiration/cursor-led-minimal-animations-shaaz-jung
+- Awwwards interactive homepage example: https://www.awwwards.com/inspiration/interactive-homepage-range-rak
+- Awwwards design-strategy warning against trend copying: https://assets.awwwards.com/awards/gallery/2023/07/HOT-RIGHT-NOW-BOOK-2023.pdf
+
 ## Motion language
 `proximity -> response -> momentum -> alignment -> signal -> transition`
 
 The site should feel like a system responding to an operator.
-
-## Awwwards benchmark
-Use high-quality award work to benchmark interaction fidelity, scroll-linked storytelling, cursor/hover behaviour, transitions, responsive behaviour, accessibility, performance, and choreography - not visual styling.
-
-The target remains recognisably My Systems: technical, calm, precise, modular, infrastructure-oriented, and restrained.
 
 ## Series-level design rule
 My Systems is a series of related infrastructure projects. Individual systems may have their own functional visualisations, but they must feel like parts of one ecosystem.
@@ -70,7 +78,7 @@ Do not introduce motifs that make the site feel like a separate generic creative
 - [x] Neighbouring rows recede when one row is addressed.
 - [x] Keyboard focus uses the same active-row language.
 - [x] Reset signal transforms on pointer exit to prevent stuck borders.
-- [ ] Replace remaining generic looping signal behaviour with interaction/scroll-driven signalling.
+- [x] Active/scroll-active rows now use a controlled signal pulse instead of only a static border.
 
 ### Phase 4 - Globe interaction
 - [x] Continuous autonomous rotation restored.
@@ -110,34 +118,39 @@ Do not introduce motifs that make the site feel like a separate generic creative
 - [ ] Verify touch interactions do not conflict with native scrolling.
 - [x] Prevent architecture label/heading layering conflicts.
 - [x] Reformat the main stylesheet so the motion layer can be maintained safely.
+- [x] Consolidate motion CSS into a dedicated `motion-system.css` layer.
+- [x] Remove the duplicate motion runtime from the page; `main.js` is now the functional interaction runtime.
 
 ## Target choreography
 `Hero responds -> user scrolls -> hero recedes -> systems activate -> architecture takes over -> globe becomes the focus -> principles settle -> CTA resolves`
 
 Avoid: `Everything is constantly moving.`
 
-## Current implementation notes
-Primary files:
-- `site/js/main.js`
-- `site/js/motion-enhancement.js`
-- `site/css/style.css`
-- `site/css/motion-enhancement.css`
-- `site/css/brand-lock.css`
+## Current implementation architecture
+- `site/css/base.css` - reset/accessibility primitives.
+- `site/css/style.css` - existing visual/layout/component styling.
+- `site/css/motion-system.css` - motion-only presentation rules and interaction states.
+- `site/css/brand-lock.css` - final brand/color authority and browser/theme override protection.
+- `site/js/main.js` - GSAP/ScrollTrigger choreography, cursor, magnetic interactions, system activation, scroll velocity, and globe renderer/interaction.
+- `site/index.html` - loads the layers in order: base -> visual -> motion -> brand lock.
 
-Prefer CSS transforms, requestAnimationFrame, and the existing GSAP/ScrollTrigger setup. Avoid expensive filters, unnecessary DOM effects, and continuous animation of large element counts.
+The previous `motion-enhancement.css` / `motion-enhancement.js` layer has been removed from the runtime so there is no second animation system fighting `main.js`.
 
 ## Latest implementation pass
-- Reformatted `site/css/style.css` into readable sections before continuing implementation.
-- Preserved the My Systems palette and protected page/architecture backgrounds with `!important`.
-- Added a structured interaction layer for hero depth, system pointer response, scroll activation, scroll velocity, and globe state/proximity signals.
-- Kept the implementation focused on infrastructure/interface behaviour rather than decorative effects.
+- Added a dedicated `motion-system.css` so motion presentation is no longer mixed into the visual layer.
+- Consolidated the page runtime around `main.js`, eliminating duplicate hero/system/globe listeners.
+- Added stateful system signal pulses for addressed rows.
+- Preserved the existing brand palette and final brand-lock layer.
+- Kept architecture text above the globe to prevent the previously observed overlap.
+- Kept motion quiet when there is no interaction except for intentional globe/network activity.
 
 ## Next pass
-1. Connect globe proximity/state variables to the globe renderer so `aware`, `active`, and `settling` visibly affect rotation/activity.
-2. Replace the remaining generic system signal loop with pointer/scroll-driven signal travel.
-3. Complete full-page choreography and timing QA.
-4. Audit all brand colors and browser/theme override protection.
-5. Test performance, touch, keyboard and reduced-motion behaviour.
+1. Connect globe proximity/state variables directly to renderer behaviour so `aware`, `active`, and `settling` have visibly distinct but restrained responses.
+2. Replace the remaining always-running globe signal activity with sparse stateful signals while retaining autonomous rotation.
+3. Build a unified section-progress choreography rather than isolated ScrollTrigger timelines.
+4. Add touch-specific interaction rules without hijacking native scroll.
+5. Perform visual/performance QA at desktop, tablet, and mobile sizes.
+6. Audit all brand colors and browser/theme override protection after final styling changes.
 
 ## Definition of done
 The site should feel operational and alive when the viewer moves, hovers, scrolls, and interacts - not because it is constantly animated. It should still unmistakably feel like **My Systems**, not an Awwwards imitation.
