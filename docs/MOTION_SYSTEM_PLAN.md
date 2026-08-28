@@ -4,18 +4,24 @@
 
 Build a high-end interactive motion system for the My Systems website that feels like infrastructure/interface motion rather than decorative animation.
 
-The motion should keep the viewer engaged through responsiveness, scroll choreography, proximity, alignment, signals, and momentum while preserving the My Systems brand: technical, calm, precise, modular, and infrastructure-oriented.
+The motion should keep the viewer engaged through responsiveness, scroll choreography, proximity, alignment, signals, and momentum while preserving the My Systems brand and the identity of the My Systems series.
 
 ## Brand constraints
 
-- Preserve the existing dark neutral palette and restrained `#5BA7FF` accent.
-- Preserve Manrope for display/UI text and DM Mono for technical metadata.
+The motion layer is subordinate to the My Systems brand profile and series identity. Awwwards-quality interaction is a quality target, not a reason to copy agency aesthetics or change the brand.
+
+- Preserve the existing My Systems dark neutral palette and restrained blue signal accent.
+- Preserve the established typography and technical/infrastructure visual language.
+- Preserve the modular, systems-oriented composition and clear hierarchy.
+- Motion should reinforce the concept of interconnected personal infrastructure/systems.
 - No grain or noise.
 - No blobs, purple gradients, neon treatment, glassmorphism, excessive blur, or generic AI-landing-page effects.
+- Do not make the page unnecessarily UI-heavy; interaction and motion should carry the sophistication.
+- Keep visual contrast balanced: dark, but not crushed into near-black sections that create unintended visual holes.
+- Brand colors are protected by `site/css/brand-lock.css`; new brand-sensitive color declarations should use `!important` where necessary to prevent browser/theme overrides.
 - Motion must support hierarchy and system behaviour, not decorate empty space.
 - Quiet when the viewer is idle; responsive when the viewer interacts.
 - Preserve `prefers-reduced-motion` and provide touch equivalents where interaction exists.
-- Brand colors are protected by `site/css/brand-lock.css` and should remain explicitly locked with `!important` when new visual rules are introduced.
 
 ## Motion language
 
@@ -24,6 +30,39 @@ Core vocabulary:
 `proximity -> response -> momentum -> alignment -> signal -> transition`
 
 The site should feel like a system responding to an operator.
+
+## Awwwards quality reference
+
+Use Awwwards-level work as a benchmark for interaction fidelity, choreography, responsiveness, transitions, and polish - not as a visual template.
+
+The relevant quality characteristics are:
+
+- Strong scroll-linked storytelling instead of generic entrance animations.
+- Purposeful cursor and hover states.
+- Responsive visual systems that react to pointer proximity and intent.
+- Distinct interaction moments rather than constant motion.
+- High-quality transitions between sections.
+- Strong mobile/responsive behaviour.
+- Performance-conscious animation.
+- Accessibility and reduced-motion support.
+
+The My Systems implementation should remain recognisably My Systems: technical, calm, precise, modular, infrastructure-oriented, and restrained.
+
+## Series-level design rule
+
+My Systems is a series of related infrastructure projects. Each system can have its own functional visualisation, but the website must communicate that these are parts of one coherent ecosystem.
+
+Motion should establish recurring system language:
+
+- Blue = signal/interaction, not decoration.
+- Lines = connectivity/structure.
+- Movement = response/state, not ambient noise.
+- Nodes = systems/endpoints.
+- Alignment = architecture/order.
+- Proximity = interaction/attention.
+- Scroll = progression through the system.
+
+Do not introduce visual motifs that make one page feel like a separate brand or generic creative-tech experiment.
 
 ## Implementation roadmap
 
@@ -111,7 +150,7 @@ Avoid:
 
 ## Quality bar
 
-The target is premium interactive/web-design quality comparable to strong Awwwards-level work, but without copying another site's visual identity. The distinction should come from choreography, interaction fidelity, restraint, and consistency with the My Systems brand.
+The target is premium interactive/web-design quality comparable to strong Awwwards-level work, but without copying another site's visual identity. The distinction should come from choreography, interaction fidelity, restraint, and consistency with the My Systems brand and series.
 
 A feature is not complete merely because it animates. It is complete when the motion communicates a relationship between the viewer and the system.
 
@@ -127,31 +166,34 @@ Primary motion files:
 
 When adding motion, prefer CSS transforms and requestAnimationFrame/GSAP ScrollTrigger where already available. Avoid unnecessary DOM effects, expensive filters, or continuous animation of large numbers of elements.
 
-## Latest implementation pass
+## Direction update - Awwwards benchmark without losing My Systems
 
-The globe/architecture pass has now been implemented:
+The Awwwards research direction is being used as a quality benchmark only. The page should not become a generic award-site recreation or a UI-heavy showcase.
 
-- Globe remains autonomously rotating when idle.
-- Pointer position is tracked continuously for the globe interaction layer.
-- Drag input continues to provide direct rotation and release momentum.
-- Node proximity/hover remains available as the globe's active visual response.
-- Architecture copy movement was softened and its scroll trigger starts later so the heading has clear separation from the globe entrance.
-- Globe entrance now has a larger, slower depth transition to make the architecture section feel like a deliberate hand-off from the preceding content.
-- System row pointer variables now include horizontal and vertical response, giving the four row information layers distinct movement.
-- Active system signal origin is reset on pointer exit.
-- Brand palette remains unchanged and locked.
+The desired result is:
+
+`My Systems brand + infrastructure interaction + high-end choreography`
+
+not:
+
+`My Systems brand + unrelated agency effects`
+
+The strongest interaction opportunities remain the hero, systems rows, globe, scroll transitions, cursor, and CTA. These should be developed as a coherent motion vocabulary so the series feels like one product ecosystem.
+
+The page should remain dark but balanced. Avoid progressively darkening sections for drama; maintain enough luminance separation for structure and readability. The architecture field is intentionally lifted slightly from the base background without introducing a new brand color.
 
 ## Next implementation pass
 
-The next pass should focus on **true globe proximity/state behaviour and full-page choreography**, not decorative effects:
-
-1. Use the tracked pointer position to influence globe rotation subtly based on proximity.
+1. Apply restrained pointer-proximity influence to the globe.
 2. Introduce explicit idle -> aware -> active -> settling globe states.
-3. Make network activity sparse and event-like rather than continuously uniform.
+3. Make network activity sparse and intentional.
 4. Replace the remaining generic system signal loop with interaction/scroll-driven signalling.
 5. Perform a full-page timing pass and remove competing motion.
-6. Test performance, touch, keyboard and reduced-motion behaviour.
+6. Audit every new color declaration against the brand profile and keep browser/theme overrides locked with `!important` where appropriate.
+7. Test performance, touch, keyboard and reduced-motion behaviour.
 
 ## Definition of done
 
 The finished motion layer should make the site feel operational and alive even when content is unchanged. A visitor should discover motion by moving, hovering, scrolling, and interacting - not by being bombarded by autonomous effects.
+
+It should still unmistakably feel like **My Systems**, not an Awwwards imitation.
