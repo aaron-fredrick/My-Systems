@@ -1,21 +1,8 @@
 :root{color-scheme:dark!important;--bg:#0b0f14!important;--surface:#111821!important;--surface2:#18212b!important;--line:#273341!important;--text:#f3f6f8!important;--muted:#aeb9c4!important;--dim:#71808e!important;--brand:#5ba7ff!important;--brand-hover:#79b8ff!important}
-html,body{background:#0b0f14!important;color:#f3f6f8!important}
-body{color-scheme:dark!important}
-a{color:inherit!important}
-.nav{background:rgba(11,15,20,.48)!important;border-color:rgba(255,255,255,.06)!important}
-.navlinks,.section-label,.sys-num,.globe-hint,footer{color:#71808e!important}
-.navlinks a{color:#aeb9c4!important}.navlinks a:hover,.footer-links a:hover{color:#f3f6f8!important}
-.nav-cta{border-color:#273341!important}.nav-cta:hover{border-color:#5ba7ff!important;background:rgba(91,167,255,.08)!important}
-.mark,.cursor{border-color:rgba(91,167,255,.8)!important}.mark:before,.mark:after{background:#5ba7ff!important}
-.eyebrow,.sys-status,.principle b{color:#5ba7ff!important}
-.hero h1 em,.cta h2 span{color:transparent!important;-webkit-text-stroke-color:rgba(243,246,248,.55)!important}
-.hero-desc,.manifesto p,.sys-purpose,.architecture-copy p,.principle p{color:#aeb9c4!important}.manifesto h2 span,.architecture-copy h2 span{color:#71808e!important}
-.hero-grid{background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px)!important}
-.scrollcue span{background:#273341!important}.scrollcue span:after{background:#5ba7ff!important}
-.system-list,.system{border-color:#273341!important}.system:before,.system:after{background:#5ba7ff!important}.system[data-status="planned"] .sys-status{color:#71808e!important}.system.scroll-active .sys-num,.system.is-active .sys-num{color:#5ba7ff!important}
-.architecture{background:#080c10!important}
-.principle-grid{border-color:#273341!important}.principle{border-color:#273341!important}.principle:hover{border-color:#5ba7ff!important}.principle:nth-child(odd){border-right-color:#273341!important}
-.cta{border-top-color:#273341!important}.cta .ring{border-color:rgba(91,167,255,.12)!important}.cta .ring:before,.cta .ring:after{border-color:rgba(91,167,255,.08)!important}.cta .ring:after{border-color:rgba(91,167,255,.12)!important}
-.button{background:#f3f6f8!important;color:#0b0f14!important}.button:hover,.button:focus-visible{background:#79b8ff!important}.button:focus-visible,.system:focus-visible{outline-color:#5ba7ff!important}
-footer{border-top-color:#273341!important}
-@media(prefers-color-scheme:light){html,body{background:#0b0f14!important;color:#f3f6f8!important}.nav{background:rgba(11,15,20,.48)!important}.navlinks a{color:#aeb9c4!important}.manifesto h2 span,.architecture-copy h2 span{color:#71808e!important}}
+html,body{background:#0b0f14!important;color:#f3f6f8!important}body{color-scheme:dark!important}a{color:inherit!important}
+.nav{background:rgba(11,15,20,.72)!important;border-color:rgba(255,255,255,.075)!important}.navlinks,.section-label,.sys-num,.globe-hint,footer{color:#71808e!important}.navlinks a{color:#aeb9c4!important}.navlinks a:hover,.footer-links a:hover{color:#f3f6f8!important}.nav-cta{border-color:#273341!important}.nav-cta:hover{border-color:#5ba7ff!important;background:rgba(91,167,255,.08)!important}
+.mark,.cursor{border-color:rgba(91,167,255,.8)!important}.mark:before,.mark:after{background:#5ba7ff!important}.eyebrow,.sys-status,.principle b{color:#5ba7ff!important}.hero h1 em,.cta h2 span{color:transparent!important;-webkit-text-stroke-color:rgba(243,246,248,.55)!important}.hero-desc,.manifesto p,.sys-purpose,.architecture-copy p,.principle p{color:#aeb9c4!important}.manifesto h2 span,.architecture-copy h2 span{color:#71808e!important}
+.hero-grid{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px)!important}.scrollcue span{background:#273341!important}.scrollcue span:after{background:#5ba7ff!important}.system-list,.system{border-color:#273341!important}.system:before,.system:after{background:#5ba7ff!important}.system[data-status="planned"] .sys-status{color:#71808e!important}.system.scroll-active .sys-num,.system.is-active .sys-num{color:#5ba7ff!important}
+/* Slightly lifted architecture field: still dark, but no longer a near-black interruption. */.architecture{background:#0d1218!important}
+.principle-grid{border-color:#273341!important}.principle{border-color:#273341!important}.principle:hover{border-color:#5ba7ff!important}.principle:nth-child(odd){border-right-color:#273341!important}.cta{border-top-color:#273341!important}.cta .ring{border-color:rgba(91,167,255,.12)!important}.cta .ring:before,.cta .ring:after{border-color:rgba(91,167,255,.08)!important}.cta .ring:after{border-color:rgba(91,167,255,.12)!important}.button{background:#f3f6f8!important;color:#0b0f14!important}.button:hover,.button:focus-visible{background:#79b8ff!important}.button:focus-visible,.system:focus-visible{outline-color:#5ba7ff!important}footer{border-top-color:#273341!important}
+@media(prefers-color-scheme:light){html,body{background:#0b0f14!important;color:#f3f6f8!important}.nav{background:rgba(11,15,20,.72)!important}.navlinks a{color:#aeb9c4!important}.manifesto h2 span,.architecture-copy h2 span{color:#71808e!important}.architecture{background:#0d1218!important}}
