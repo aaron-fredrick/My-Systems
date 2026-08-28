@@ -43,13 +43,17 @@ export function initScrollMotion() {
     }
   }
 
-  let lastY=scrollY,lastT=performance.now(),velocity=0,raf=0;
+  let lastY=scrollY,lastT=performance.now(),velocity=0,raf=0,settleRaf=0;
   const onScroll=()=>{
     const now=performance.now(),dt=Math.max(8,now-lastT);
     velocity=Math.max(-3,Math.min(3,((scrollY-lastY)/dt)*16));lastY=scrollY;lastT=now;
     if(!raf) raf=requestAnimationFrame(()=>{root.style.setProperty('--scroll-velocity',velocity.toFixed(3));raf=0;});
   };
-  const settle=()=>{velocity*=.91;root.style.setProperty('--scroll-velocity',Math.abs(velocity)<.01?'0':velocity.toFixed(3));requestAnimationFrame(settle)};
+  const settle=()=>{
+    velocity*=.91;
+    root.style.setProperty('--scroll-velocity',Math.abs(velocity)<.01?'0':velocity.toFixed(3));
+    settleRaf=requestAnimationFrame(settle);
+  };
   addEventListener('scroll',onScroll,{passive:true});
-  requestAnimationFrame(settle);
+  settleRaf=requestAnimationFrame(settle);
 }
