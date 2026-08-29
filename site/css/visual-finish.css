@@ -1,0 +1,58 @@
+/* My Systems visual finish: Swiss structure + restrained futuristic atmosphere. */
+:root{
+  --vf-grid:rgba(243,246,248,.035);
+  --vf-glass:rgba(17,24,33,.54);
+  --vf-glass-strong:rgba(17,24,33,.72);
+  --vf-aurora:rgba(91,167,255,.07);
+}
+
+/* Swiss grid: reinforce alignment without changing the established layout. */
+.section-label{display:flex;align-items:center;gap:14px}
+.section-label:after{content:"";display:block;width:clamp(24px,5vw,72px);height:1px;background:var(--line);opacity:.8;transform-origin:left;transition:transform .6s var(--ease)}
+.section-label:hover:after{transform:scaleX(1.25)}
+
+/* Restrained aurora: atmosphere, not a decorative blob. */
+.hero:after,.architecture:after,.cta:after{content:"";position:absolute;pointer-events:none;z-index:0;inset:auto;}
+.hero:after{width:70vw;height:55vw;right:-18vw;top:16%;background:radial-gradient(ellipse,rgba(91,167,255,.065),transparent 67%);filter:blur(30px);opacity:.75;mix-blend-mode:screen;transform:translate3d(calc(var(--mx)*-20px),calc(var(--my)*-12px),0);will-change:transform}
+.architecture:after{width:75vw;height:55vw;right:-20vw;top:15%;background:radial-gradient(ellipse,rgba(91,167,255,.055),transparent 68%);filter:blur(34px);opacity:.7;mix-blend-mode:screen;transform:translate3d(calc(var(--mx)*-10px),calc(var(--my)*-8px),0);will-change:transform}
+.cta:after{width:65vw;height:45vw;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(91,167,255,.045),transparent 68%);filter:blur(34px);opacity:.65;mix-blend-mode:screen}
+.hero-copy,.architecture-copy,.network,.cta-content{isolation:isolate}
+
+/* Selective glass surface: navigation only; content stays editorial. */
+.nav{background:linear-gradient(180deg,rgba(11,15,20,.78),rgba(11,15,20,.62));backdrop-filter:blur(20px) saturate(115%);-webkit-backdrop-filter:blur(20px) saturate(115%);box-shadow:0 1px 0 rgba(255,255,255,.025),0 14px 40px rgba(0,0,0,.12)}
+.nav-cta{background:rgba(17,24,33,.34);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+/* Technical interaction details. */
+.nav-cta,.button{position:relative;overflow:hidden}
+.nav-cta:before,.button:before{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.nav-cta:hover:before,.nav-cta:focus-visible:before,.button:hover:before,.button:focus-visible:before{transform:scaleX(1)}
+.system{isolation:isolate}
+.system:before{box-shadow:0 0 12px rgba(91,167,255,.12)}
+.system:after{box-shadow:0 0 10px rgba(91,167,255,.1)}
+.system:hover .sys-name,.system:focus-visible .sys-name{transform:translateX(3px)}
+
+/* Subtle glass/data plate for status without converting rows into cards. */
+.sys-status{padding:6px 8px;border:1px solid transparent;transition:border-color .35s,background .35s,transform .5s var(--ease)}
+.system:hover .sys-status,.system:focus-visible .sys-status,.system.is-active .sys-status,.system.scroll-active .sys-status{border-color:rgba(91,167,255,.16);background:rgba(17,24,33,.34);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+/* Principles retain the Swiss editorial grid while gaining a directional response. */
+.principle{position:relative;overflow:hidden}
+.principle:after{content:"";position:absolute;left:0;bottom:0;width:28px;height:1px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.principle:hover:after,.principle:focus-within:after{transform:scaleX(1)}
+
+/* Globe environment: let the visual occupy the architecture without obscuring copy. */
+.network:before{content:"";position:absolute;inset:8%;border:1px solid rgba(91,167,255,.035);border-radius:50%;pointer-events:none;transform:rotate(18deg) scaleX(.62);opacity:.8}
+.network:after{content:"SYSTEM NETWORK";position:absolute;right:4%;top:12%;font:9px 'DM Mono',monospace;letter-spacing:.12em;color:var(--dim);opacity:.7;pointer-events:none}
+
+/* Stronger keyboard affordances without changing the visual language. */
+.nav a:focus-visible,.footer-links a:focus-visible,.button:focus-visible,.system:focus-visible{outline:1px solid var(--brand);outline-offset:5px}
+
+@media(max-width:900px){
+  .hero:after{width:100vw;height:80vw;right:-35vw;top:22%}
+  .architecture:after{width:110vw;height:90vw;right:-40vw}
+  .network:after{right:7%;top:8%;font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero:after,.architecture:after,.cta:after{transform:none!important;will-change:auto}
+  .section-label:after,.nav-cta:before,.button:before,.principle:after{transition:none!important}
+}
