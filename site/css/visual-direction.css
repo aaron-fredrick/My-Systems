@@ -1,0 +1,19 @@
+/* My Systems visual direction: minimal + Swiss + futuristic + restrained glass/aurora/cyberpunk. */
+:root{--visual-glass:rgba(17,24,33,.62);--visual-line:rgba(243,246,248,.09);--visual-signal:rgba(91,167,255,.24)}
+.hero-grid{opacity:.82!important;background-size:96px 96px!important;background-image:linear-gradient(90deg,rgba(243,246,248,.055) 1px,transparent 1px),linear-gradient(rgba(243,246,248,.055) 1px,transparent 1px)!important}
+.hero:after,.architecture:after,.cta:after{content:"";position:absolute;pointer-events:none;z-index:0;background:radial-gradient(ellipse,rgba(91,167,255,.095) 0%,rgba(91,167,255,.035) 34%,transparent 70%);filter:blur(42px);mix-blend-mode:screen!important;opacity:.78}
+.hero:after{width:72vw;height:58vw;right:-16vw;top:12%;transform:translate3d(calc(var(--mx)*-26px),calc(var(--my)*-16px),0)}
+.architecture:after{width:80vw;height:62vw;right:-18vw;top:12%;transform:translate3d(calc(var(--mx)*-12px),calc(var(--my)*-8px),0)}
+.cta:after{width:70vw;height:50vw;left:50%;top:50%;transform:translate(-50%,-50%)}
+.nav{background:rgba(11,15,20,.68)!important;border-bottom:1px solid var(--visual-line)!important;backdrop-filter:blur(24px) saturate(125%);-webkit-backdrop-filter:blur(24px) saturate(125%)}
+.nav-cta{background:var(--visual-glass)!important;border-color:rgba(91,167,255,.2)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.section-label{gap:12px!important}.section-label:after{content:"";display:block;width:clamp(32px,5vw,80px);height:1px;background:var(--line);opacity:.9}
+.system:hover,.system:focus-visible,.system.is-active,.system.scroll-active{background:linear-gradient(90deg,rgba(91,167,255,.045),transparent 48%)!important}
+.system:hover .sys-num,.system:focus-visible .sys-num,.system.is-active .sys-num,.system.scroll-active .sys-num{color:var(--brand)!important}
+.sys-status{padding:6px 9px!important;border:1px solid transparent}.system:hover .sys-status,.system:focus-visible .sys-status,.system.is-active .sys-status,.system.scroll-active .sys-status{background:rgba(17,24,33,.48)!important;border-color:rgba(91,167,255,.22)!important;backdrop-filter:blur(8px)}
+.principle:hover{background:rgba(91,167,255,.025);transform:translate3d(8px,0,0)!important}
+.network:before{content:"";position:absolute;inset:3%;border:1px solid rgba(91,167,255,.075);border-radius:50%;transform:rotate(18deg) scaleX(.64);pointer-events:none}.network:after{content:"SYSTEM NETWORK / LIVE";position:absolute;right:4%;top:9%;font:9px 'DM Mono',monospace;letter-spacing:.12em;color:var(--dim);pointer-events:none}
+.globe-hint{background:rgba(11,15,20,.5)!important;border:1px solid rgba(91,167,255,.18)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.nav a:focus-visible,.button:focus-visible,.system:focus-visible{outline:1px solid var(--brand)!important;outline-offset:5px}
+@media(max-width:900px){.hero:after{width:110vw;height:90vw;right:-40vw}.architecture:after{width:120vw;height:100vw;right:-45vw}.hero-grid{background-size:72px 72px!important}.network:after{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.hero:after,.architecture:after,.cta:after{transform:none!important}.principle:hover{transform:none!important}}
